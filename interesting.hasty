@@ -1,0 +1,192 @@
+// Come up with an "interesting" example of hasty doing some
+//   nontrivial computation or using some nontrivial data structure.
+
+// What does the program do?
+// This demonstrates a simple linked list implementation 
+// Remove(idx: Int) is notably missing, but we feel that implementing it wouldn't demonstrate anything new about OOP in Hasty.
+
+class Node {
+    var value : String;
+    var isEnd : Bool;
+    var next : Node;
+
+    init(n : String) {
+        self.value = n;
+        self.isEnd = false;
+        return;
+    }
+    
+
+    func setNext(next : Node) -> Void {
+        self.next = next;
+        return;
+    }
+}
+
+class List {
+    var head : Node;
+    var size : Int;
+
+    init () {
+        self.head = Node("");
+        self.head.isEnd = true;
+        self.size = 0;
+    }
+
+    // Insert a node at the front of the list
+    func push(node : Node) -> Void {
+        node.setNext(self.head);
+        self.head = node;
+        self.size = self.size + 1;
+    }
+
+
+    // Remove and return the first element in the list if list is non-empty
+    func pop() -> Node? {
+        var nill: Node? = nil;
+        if (self.size == 0) {
+            return nill;
+        }
+        var ret : Node? = self.head;
+        self.head = self.head.next;
+        self.size = self.size - 1;
+        return ret;
+    }
+
+    // Return the nth element of the list
+    func get(n : Int) -> Node? {
+        var nilNode : Node? = nil;
+        if (n < 0 || n >= self.size) {
+            return nilNode;
+        }
+        var current : Node = self.head;
+        while (n > 0 && !current.isEnd) {
+            current = current.next;
+            n = n - 1;
+        }
+  
+        var ret : Node? = current;
+        return ret;
+    }
+
+    // Sets the value of the nth element of the list to val
+    func set(n : Int, val: String) -> Void {
+        if (n < 0 || n >= self.size) {
+            return;
+        }
+        var current : Node = self.head;
+        while (n > 0) {
+            current = current.next;
+            n = n - 1;
+        }
+        current.value = val;
+    }
+
+    // Inserts a node at the end of the list
+    func append(node: Node)  -> Void {
+        self.insert(node, self.size);
+    }
+
+    // Inserts a node at the idxth position
+    func insert(node: Node, idx: Int) -> Void {
+        if (idx < 0) {
+            return;
+        }
+        if (idx == 0) {
+            self.push(node);
+            return;
+        }
+        var current: Node = self.head;
+        var next: Node = current.next;
+        while (idx > 1 && !next.isEnd) {
+            current = current.next;
+            next = next.next;
+            idx = idx - 1;
+        }
+        current.next = node;
+        node.next = next;
+        self.size = self.size + 1;
+        return;
+    }
+
+    // Prints the values stored in the list with one value per line
+    func printList() -> Void {
+        print("list:");
+        var current : Node = self.head;
+        while (!current.isEnd) {
+            print(current.value);
+            current = current.next;
+        }
+        print("end list");
+        return;
+    }
+
+    // Returns the list reversed
+    func reverse() -> List {
+        var ret : List = List();
+        var current : Node = self.head;
+        while (!current.isEnd) {
+            var temp: Node = Node(current.value);
+            ret.push(temp);
+            current = current.next;
+        }
+        return ret;
+    }
+}
+
+
+// This program creates a list, then inserts, appends, pushes, pops, and sets values, then finally reverses it 
+// (reverse is a deep copy -- to reverse in place just set list = list.reverse()). 
+// EXPECTED OUTPUT
+//list:
+//START
+//O
+//O
+//O
+//O
+//O
+//O
+//O
+//O
+//O
+//O
+//END
+//end list
+//START
+//list:
+//END
+//O
+//O
+//O
+//O
+//X
+//X
+//O
+//O
+//O
+//O
+//START
+//end list
+func cs132start() -> Void {
+
+    var list : List = List();
+    var n : Int = 10;
+    list.push(Node("START"));
+    while (n > 0) {
+        list.append(Node("O"));
+        n = n - 1;
+    }
+    list.append(Node("END"));
+    list.printList();
+    print((list.pop() ?? Node("not gonna happen")).value);
+    list.set(0, "START");
+    
+    
+    list.insert(Node("X"), 5);
+    list.set(6, "X");
+    list.reverse().printList();
+
+
+    return;
+
+}

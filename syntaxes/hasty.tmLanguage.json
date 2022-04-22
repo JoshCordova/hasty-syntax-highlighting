@@ -7,14 +7,33 @@
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#entity"
+		},
+		{
+			"include": "#numbers"
 		}
 	],
 	"repository": {
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.hasty",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
+				"match": "\\b(if|while|return|func|else)\\b"
+			},
+			{
+				"name": "keyword.decl.hasty",
+				"match": "\\b(func|class|var)\\b"
+			},
+			{
+				"name": "keyword.vars.hasty",
+				"match": "self"
+			},
+			{
+				"name": "keyword.relops.hasty",
+				"match": "(<=|>=|==|!=|>|<|&&|->)"
+			}
+		]
 		},
 		"strings": {
 			"name": "string.quoted.double.hasty",
@@ -26,7 +45,25 @@
 					"match": "\\\\."
 				}
 			]
-		}
+		},
+
+		"entity": {
+			"patterns": [
+				{
+				"name": "entity.name.type.hasty",
+				"match": "\\b(Int|String|Void|Bool|nil)\\b"
+				}
+		]
+		},
+		"numbers": {
+			"patterns": [
+			  {
+				"name": "constant.numeric.integer.hasty",
+				"match": "\\b(\\d+)\\b"
+			  }
+			]
+		  }
 	},
+
 	"scopeName": "source.hasty"
 }
