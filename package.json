@@ -1,0 +1,25 @@
+{
+    "name": "hasty-syntax-highlighting",
+    "displayName": "Hasty Syntax Highlighting",
+    "description": "Syntax highlighting for the Hasty language",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.66.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "hasty",
+            "aliases": ["Hasty", "hasty"],
+            "extensions": [".hasty"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "hasty",
+            "scopeName": "source.hasty",
+            "path": "./syntaxes/hasty.tmLanguage.json"
+        }]
+    }
+}
