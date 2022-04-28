@@ -50,8 +50,20 @@
 		"entity": {
 			"patterns": [
 				{
-				"name": "entity.name.type.hasty",
-				"match": "\\b(Int|String|Void|Bool|nil)\\b"
+					"name": "entity.name.type.hasty",
+					"match": "\\b(Int|String|Void|Bool|nil)\\b"
+				},
+				{
+					"name": "entity.name.class",
+					"match":"\\b[A-Z][a-zA-Z0-9]*\\b"
+				},
+				{
+					"name": "entity.name.function",
+					"match": "[a-z][a-zA-Z0-9]*[\\s]*\\("
+				},
+				{
+					"name": "variable.other",
+					"match":"[a-z][a-zA-Z0-9]*"
 				}
 		]
 		},
