@@ -34,7 +34,7 @@
 			},
 			{
 				"name": "keyword.relops.hasty",
-				"match": "(<=|>=|==|!=|>|<|&&|->)"
+				"match": "(<=|>=|==|!=|>|<|&&|->|\\?\\?)"
 			},
 			{
 				"name": "keyword.special.hasty",
@@ -66,7 +66,8 @@
 				},
 				{
 					"name": "entity.name.function",
-					"match": "[a-z][a-zA-Z0-9]*[\\s]*\\("
+					"match": "[a-z][a-zA-Z0-9]*[\\s]*(?=[\\(])"
+
 				},
 				{
 					"name": "variable.other",
